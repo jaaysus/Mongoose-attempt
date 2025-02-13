@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 
 
-const Chef = require('./Models/Chef');
-const Recette = require('./Models/Recette');
-const Restaurant = require('./Models/Restaurant');
+const Chef = require('./Models/ChefModel');
+const Recette = require('./Models/RecetteModel');
+const Restaurant = require('./Models/RestaurantModel');
 
 
-mongoose.connect('mongodb://localhost:27017/mongoosetrial', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb://localhost:27017/mongoosetrial')
   .then(() => console.log('Connected to MongoDB'))
   .catch(err => {
     console.error('Error connecting to MongoDB:', err);
