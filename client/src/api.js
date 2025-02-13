@@ -1,4 +1,4 @@
-const API_URL = '/api' || 'https://127.0.0.1:3000/api'; 
+const API_URL = '/api';
 
 
 export const fetchChefs = async () => {
