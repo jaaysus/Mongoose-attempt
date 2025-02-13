@@ -1,4 +1,4 @@
-$nodemonProcess = Start-Process "nodemon" -ArgumentList "server.js" -WorkingDirectory "E:\SQL 2nd Year\Cloud_Native\tp2-mongoose" -PassThru
+$nodemonProcess = Start-Process -FilePath "cmd.exe" -ArgumentList "/c nodemon server.js" -WorkingDirectory "E:\SQL 2nd Year\Cloud_Native\tp2-mongoose" -PassThru
 Start-Sleep -Seconds 2
 
 $npmProcess = Start-Process -FilePath "cmd.exe" -ArgumentList "/c npm run dev" -WorkingDirectory "E:\SQL 2nd Year\Cloud_Native\tp2-mongoose\client" -PassThru
