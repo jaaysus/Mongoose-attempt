@@ -27,9 +27,9 @@ mongoose.connect(DB_URL, { dbName: DB_NAME })
   });
 
 
-app.use('/chefs', require('./Routes/Chef'));
-app.use('/recette', require('./Routes/Recette'));
-app.use('/restaurant', require('./Routes/Restaurant'));
+app.use('/api/chefs', require('./Routes/Chef'));
+app.use('/api/recette', require('./Routes/Recette'));
+app.use('/api/restaurant', require('./Routes/Restaurant'));
 
 
 app.listen(PORT, () => {
