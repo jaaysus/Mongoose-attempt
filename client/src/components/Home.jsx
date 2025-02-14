@@ -12,9 +12,6 @@ const Home = () => {
             <Link to="/chefs">View Chefs</Link>
           </li>
           <li>
-            <Link to="/add-chef">Add a Chef</Link>
-          </li>
-          <li>
             <Link to="/recipes">View Recipes</Link>
           </li>
           <li>

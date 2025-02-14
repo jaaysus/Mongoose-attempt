@@ -1,9 +1,8 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import ChefList from './components/ChefList';
-import AddChefForm from './components/AddChefForm';
-import RecipeList from './components/RecipeList';
 import Home from './components/Home';
-import RestaurantList from './components/RestaurantList';
+import Chef from './components/chef';
+import Recette from './components/Recette';
+import Restaurant from './components/Restaurant';
 
 function App() {
   return (
@@ -12,10 +11,9 @@ function App() {
         <h1>Restaurant Management</h1>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/add-chef" element={<AddChefForm />} />
-          <Route path="/chefs" element={<ChefList />} />
-          <Route path="/recipes" element={<RecipeList />} />
-          <Route path="/restaurants" element={<RestaurantList />} />
+          <Route path="/chefs" element={<Chef />} />
+          <Route path="/recipes" element={<Recette />} />
+          <Route path="/restaurants" element={<Restaurant />} />
         </Routes>
       </div>
     </Router>

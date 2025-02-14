@@ -14,6 +14,11 @@ router.get('/all', async (req, res) => {
 router.get('/chefs/:restaurantname', async (req, res) => {
     const { restaurantname } = req.params;
     const restaurant = await Restaurant.findOne({ name: restaurantname });
+
+    if (!restaurant) {
+        return res.status(404).json({ error: 'Restaurant not found' });
+    }
+
     const chefs = await Chef.find({ restaurant: restaurant._id });
     res.json(chefs);
 });
@@ -22,7 +27,14 @@ router.get('/chefs/:restaurantname', async (req, res) => {
 router.get('/recettes/:restaurantname', async (req, res) => {
     const { restaurantname } = req.params;
     const restaurant = await Restaurant.findOne({ name: restaurantname });
-    const recettes = await Recette.find({ restaurant: restaurant._id });
+
+    if (!restaurant) {
+        return res.status(404).json({ error: 'Restaurant not found' });
+    }
+
+    const chefs = await Chef.find({ restaurant: restaurant._id });
+    const chefIds = chefs.map(chef => chef._id);
+    const recettes = await Recette.find({ chef: { $in: chefIds } });
     res.json(recettes);
 });
 
@@ -59,14 +71,32 @@ router.put('/update/:name', async (req, res) => {
         { address, rating, category, yearOpened },
         { new: true }
     );
+
+    if (!updatedRestaurant) {
+        return res.status(404).json({ error: 'Restaurant not found' });
+    }
+
     res.json(updatedRestaurant);
 });
 
 
 router.delete('/delete/:name', async (req, res) => {
     const { name } = req.params;
-    await Restaurant.findOneAndDelete({ name });
-    res.json({ message: 'Restaurant deleted' });
+    const restaurant = await Restaurant.findOne({ name });
+
+    if (!restaurant) {
+        return res.status(404).json({ error: 'Restaurant not found' });
+    }
+
+    
+    const chefs = await Chef.find({ restaurant: restaurant._id });
+    const chefIds = chefs.map(chef => chef._id);
+
+    await Recette.deleteMany({ chef: { $in: chefIds } });
+    await Chef.deleteMany({ restaurant: restaurant._id });
+    await restaurant.remove();
+
+    res.json({ message: 'Restaurant, its chefs, and their recettes deleted' });
 });
 
 module.exports = router;
